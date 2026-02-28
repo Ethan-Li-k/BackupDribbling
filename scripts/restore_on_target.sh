@@ -36,7 +36,7 @@ SOCERLAB_ROOT="${WORKSPACE_ROOT}/soccerLab"
 TARGET_SRC="${SOCERLAB_ROOT}/source/soccerTask"
 TARGET_TRAIN="${SOCERLAB_ROOT}/scripts/rsl_rl/base/train.py"
 TARGET_LOG="${WORKSPACE_ROOT}/logs/rsl_rl/dribbling_g1/${RUN_ID}"
-TARGET_T1="${WORKSPACE_ROOT}/data/assets/assetslib/T1"
+TARGET_T1="${WORKSPACE_ROOT}/data/assets/assetslib/T1new"
 
 mkdir -p "${SOCERLAB_ROOT}/source"
 mkdir -p "$(dirname "${TARGET_TRAIN}")"

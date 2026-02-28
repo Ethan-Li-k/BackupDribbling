@@ -32,7 +32,7 @@ import isaaclab.sim as sim_utils
 # Define T1 Config locally since it's not in the python path
 T1_HUMANOID_CFG = ArticulationCfg(
     spawn=sim_utils.UrdfFileCfg(
-        asset_path="/root/data/assets/assetslib/T1/T1.urdf",
+        asset_path="/root/data/assets/assetslib/T1new/T1.urdf",
         fix_base=False,
         make_instanceable=False, # Disable instanceable to avoid path issues with Fabric
         joint_drive=None,
@@ -60,21 +60,21 @@ T1_HUMANOID_CFG = ArticulationCfg(
     soft_joint_pos_limit_factor=0.9,
     actuators={
         "hips_knees": ImplicitActuatorCfg(
-            joint_names_expr=[".*_hip_.*", ".*_knee_.*"],
+            joint_names_expr=["left_hip_.*_joint", "right_hip_.*_joint", "left_knee_joint", "right_knee_joint"],
             effort_limit_sim=200.0,
             velocity_limit_sim=20.0,
             stiffness=250.0,
             damping=10.0,
         ),
         "ankles": ImplicitActuatorCfg(
-            joint_names_expr=[".*_ankle_.*"],
+            joint_names_expr=["left_ankle_.*_joint", "right_ankle_.*_joint"],
             effort_limit_sim=200.0,
             velocity_limit_sim=20.0,
             stiffness=100.0,
             damping=2.0,
         ),
         "head": ImplicitActuatorCfg(
-            joint_names_expr=["Head_.*"],
+            joint_names_expr=["Head_yaw", "Head_pitch"],
             effort_limit_sim=20.0,
             velocity_limit_sim=10.0,
             stiffness=20.0,
@@ -141,7 +141,7 @@ class ActionsCfg:
     """Action specifications for the environment."""
     joint_pos = mdp.JointPositionActionCfg(
         asset_name="robot", 
-        joint_names=[".*_hip_.*", ".*_knee_.*", ".*_ankle_.*", "Head_.*"], 
+        joint_names=["left_hip_.*_joint", "right_hip_.*_joint", "left_knee_joint", "right_knee_joint", "left_ankle_.*_joint", "right_ankle_.*_joint", "Head_yaw", "Head_pitch"], 
         scale=0.3,  # Increased from 0.25
         use_default_offset=True,
     )

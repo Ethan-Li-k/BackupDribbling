@@ -34,10 +34,12 @@ fi
 
 SOCERLAB_ROOT="${WORKSPACE_ROOT}/soccerLab"
 TARGET_SRC="${SOCERLAB_ROOT}/source/soccerTask"
+TARGET_TRAIN="${SOCERLAB_ROOT}/scripts/rsl_rl/base/train.py"
 TARGET_LOG="${WORKSPACE_ROOT}/logs/rsl_rl/dribbling_g1/${RUN_ID}"
 TARGET_T1="${WORKSPACE_ROOT}/data/assets/assetslib/T1"
 
 mkdir -p "${SOCERLAB_ROOT}/source"
+mkdir -p "$(dirname "${TARGET_TRAIN}")"
 mkdir -p "$(dirname "${TARGET_LOG}")"
 mkdir -p "${TARGET_T1}"
 
@@ -52,6 +54,9 @@ rsync -a "${BUNDLE_DIR}/files_strict/source/soccerTask/" "${TARGET_SRC}/"
 if [[ "${USE_RUNTIME_EXCEPTIONS}" == "true" ]]; then
   if [[ -d "${BUNDLE_DIR}/files_runtime_exceptions/source/soccerTask" ]]; then
     rsync -a "${BUNDLE_DIR}/files_runtime_exceptions/source/soccerTask/" "${TARGET_SRC}/"
+  fi
+  if [[ -f "${BUNDLE_DIR}/files_runtime_exceptions/source/soccerLab/scripts/rsl_rl/base/train.py" ]]; then
+    rsync -a "${BUNDLE_DIR}/files_runtime_exceptions/source/soccerLab/scripts/rsl_rl/base/train.py" "${TARGET_TRAIN}"
   fi
   if [[ -f "${BUNDLE_DIR}/files_runtime_exceptions/data/assets/assetslib/T1/T1.urdf" ]]; then
     rsync -a "${BUNDLE_DIR}/files_runtime_exceptions/data/assets/assetslib/T1/T1.urdf" "${TARGET_T1}/T1.urdf"

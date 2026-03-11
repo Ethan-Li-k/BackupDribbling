@@ -1,6 +1,10 @@
 # BackupDribbling (master)
 
-本仓库的 `master` 分支按 `soccerLab` 原生目录组织（`scripts/`、`source/`、`logs/`），用于跨主机复现 Dribbling 训练。
+本仓库的 `master` 分支按 `soccerLab` 原生目录组织（`scripts/`、`source/`、`logs/`），用于跨主机复现 Dribbling 训练，train与play的效果如下。
+
+https://github.com/user-attachments/assets/a5aa5591-374d-49f2-954d-7135b98bd23b
+
+https://github.com/user-attachments/assets/6137dcdf-9c69-46be-b491-95316c3a3f4b
 
 ## 必须先满足
 

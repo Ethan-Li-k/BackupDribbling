@@ -1,4 +1,4 @@
-# BackupDribbling (master)
+# BackupDribbling
 
 本仓库的 `master` 分支按 `soccerLab` 原生目录组织（`scripts/`、`source/`、`logs/`），用于跨主机复现 Dribbling 训练，train与play的效果如下。
 

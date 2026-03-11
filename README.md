@@ -1,28 +1,32 @@
-# BackupDribbling
+# BackupDribbling (master)
 
-用于跨主机复现 `Loco-G1-Dribbling` 训练运行环境（不包含视频）。
+本仓库的 `master` 分支按 `soccerLab` 原生目录组织（`scripts/`、`source/`、`logs/`），用于跨主机复现 Dribbling 训练。
 
-## 前置条件
+## 必须先满足
 
-目标主机已具备：
+在目标主机上，必须先安装并验证 **IsaacLab** 可用（含对应 Python 环境）。
 
-- IsaacLab 可运行环境
-- `/root/soccerLab` 工程目录（与当前脚本路径一致）
+> 未安装好 IsaacLab 时，本仓库内容不能直接运行。
 
-## 最短上手（新主机）
+## 目录说明
+
+- `scripts/`：训练入口与扩展脚本（含 `scripts/rsl_rl/base/train.py`）
+- `source/soccerTask/`：任务代码（含 dribbling）
+- `source/third_party/beyondAMP/`：依赖的第三方训练模块
+- `logs/rsl_rl/dribbling_g1/2025-12-11_18-01-51/`：resume 所需快照
+
+## 新主机最短步骤
 
 ```bash
 git clone https://github.com/Ethan-Li-k/BackupDribbling.git /root/BackupDribbling
-bash /root/BackupDribbling/scripts/restore_on_target.sh --bundle-dir /root/BackupDribbling --workspace-root /root --run-id 2025-12-11_18-01-51 --checkpoint model_1300.pt --use-runtime-exceptions true
+rsync -a /root/BackupDribbling/scripts/ /root/soccerLab/scripts/
+rsync -a /root/BackupDribbling/source/ /root/soccerLab/source/
+rsync -a /root/BackupDribbling/logs/ /root/logs/
+python -m pip install -e /root/soccerLab/source/soccerTask
 python /root/soccerLab/scripts/rsl_rl/base/train.py --task Loco-G1-Dribbling --headless --resume True --load_run 2025-12-11_18-01-51 --checkpoint model_1300.pt
 ```
 
-## 说明
+## 分支约定
 
-- `restore_on_target.sh` 会把本仓库中的 `soccerTask` 与定制 `train.py` 同步到目标路径。
-- 默认使用 `files_runtime_exceptions`（推荐，保证可运行）。
-- 若你只想恢复严格时间截断文件，可把 `--use-runtime-exceptions` 改为 `false`（可能无法完整运行）。
-
-## 相关文档
-
-- 迁移说明（中文）：`README_MIGRATION_CN.md`
+- `backup`：保留原先 master 的旧目录版本
+- `master`：当前按 `soccerLab` 目录组织的新版本
